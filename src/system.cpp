@@ -24,7 +24,8 @@ vector<Process> &System::Processes() {
 
     for(int pid:pids){
         //int pid, string user, string cmd, float cpu_u, string ram_u, int uptime
-        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), 5.5, LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
+        float cpu = LinuxParser::ActiveJiffies(pid)/LinuxParser::UpTime(pid);
+        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), cpu, LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
         processes_.push_back(process);
     }
 
