@@ -7,8 +7,8 @@ public:
 
     // DONE: Declare any necessary private members
 private:
-    int last_total = 0;
-    int last_idle = 0;
+    long last_total = 0;
+    long last_idle = 0;
 };
 
 #endif
