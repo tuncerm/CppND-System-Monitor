@@ -29,6 +29,7 @@ vector<Process> &System::Processes() {
     }
 
     std::sort(processes_.begin(), processes_.end(), [](Process a, Process b){ return a < b ; });
+    return processes_;
 }
 
 // DONE: Return the system's kernel identifier (string)
