@@ -2,7 +2,6 @@
 
 #include "processor.h"
 #include "linux_parser.h"
-
 using namespace std;
 
 // DONE: Return the aggregate CPU utilization
