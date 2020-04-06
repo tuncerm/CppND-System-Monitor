@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "process.h"
+#include "format.h"
 
 using std::string;
 using std::to_string;
@@ -31,7 +32,7 @@ string Process::Ram() { return ram_; }
 string Process::User() { return user_; }
 
 // TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { return uptime_; }
+string Process::UpTime() { return Format::ElapsedTime(uptime_); }
 
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function

@@ -228,11 +228,11 @@ string LinuxParser::Ram(int pid) {
             std::istringstream linestream(line);
             linestream >> key >> value;
             if(key == "VmSize:"){
-                return value;
+                return to_string(std::stoi(value)/1024);
             }
         }
     }
-    return "";
+    return "0";
 }
 
 // DONE: Read and return the user ID associated with a process
