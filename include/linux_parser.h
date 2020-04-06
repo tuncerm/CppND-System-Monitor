@@ -21,7 +21,7 @@ namespace LinuxParser {
 // System
     float MemoryUtilization();
 
-    long UpTime();
+    long SystemUpTime();
 
     std::vector<int> Pids();
 
