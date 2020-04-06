@@ -23,12 +23,13 @@ vector<Process> &System::Processes() {
     processes_.clear();
     vector<int> pids = LinuxParser::Pids();
 
-    for(int pid:pids){
-        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), LinuxParser::ActiveJiffies(pid), LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
+    for (int pid:pids) {
+        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), LinuxParser::ActiveJiffies(pid),
+                        LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
         processes_.push_back(process);
     }
 
-    std::sort(processes_.begin(), processes_.end(), [](Process a, Process b){ return a < b ; });
+    std::sort(processes_.begin(), processes_.end(), [](Process a, Process b) { return a < b; });
     return processes_;
 }
 

@@ -117,14 +117,14 @@ long LinuxParser::ActiveJiffies(int pid) {
     long jiffies = 0;
     string line, value;
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);
-    if(stream.is_open()){
+    if (stream.is_open()) {
         std::getline(stream, line);
         std::istringstream linestream(line);
         int i = 0;
-        for(; i < 14; ++i){
+        for (; i < 14; ++i) {
             linestream >> value;
         }
-        for(; i < 18; ++i){
+        for (; i < 18; ++i) {
             jiffies += std::stol(value);
         }
     }
@@ -210,10 +210,10 @@ int LinuxParser::RunningProcesses() {
 string LinuxParser::Command(int pid) {
     string cmd, line;
     std::ifstream stream(kProcDirectory + to_string(pid) + kCmdlineFilename);
-    if(stream.is_open()){
+    if (stream.is_open()) {
         std::getline(stream, line);
         std::istringstream linestream(line);
-        linestream>>cmd;
+        linestream >> cmd;
     }
     return cmd;
 }
@@ -223,12 +223,12 @@ string LinuxParser::Command(int pid) {
 string LinuxParser::Ram(int pid) {
     string key, value, line;
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);
-    if(stream.is_open()){
-        while(std::getline(stream, line)){
+    if (stream.is_open()) {
+        while (std::getline(stream, line)) {
             std::istringstream linestream(line);
             linestream >> key >> value;
-            if(key == "VmSize:"){
-                return to_string(std::stoi(value)/1024);
+            if (key == "VmSize:") {
+                return to_string(std::stoi(value) / 1024);
             }
         }
     }
@@ -240,11 +240,11 @@ string LinuxParser::Ram(int pid) {
 string LinuxParser::Uid(int pid) {
     string key, value, line;
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);
-    if(stream.is_open()){
-        while(std::getline(stream, line)){
+    if (stream.is_open()) {
+        while (std::getline(stream, line)) {
             std::istringstream linestream(line);
             linestream >> key >> value;
-            if(key == "Uid:"){
+            if (key == "Uid:") {
                 return value;
             }
         }
@@ -258,12 +258,12 @@ string LinuxParser::User(int pid) {
     string uid = LinuxParser::Uid(pid);
     string user, line, key, value;
     std::ifstream stream(kPasswordPath);
-    if(stream.is_open()){
-        while(std::getline(stream, line)){
+    if (stream.is_open()) {
+        while (std::getline(stream, line)) {
             std::replace(line.begin(), line.end(), ':', ' ');
             std::istringstream linestream(line);
             linestream >> user >> key >> value;
-            if(value == uid){
+            if (value == uid) {
                 return user;
             }
         }
@@ -277,10 +277,10 @@ long int LinuxParser::UpTime(int pid) {
     long uptime = 0;
     string line, value;
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);
-    if(stream.is_open()){
+    if (stream.is_open()) {
         std::getline(stream, line);
         std::istringstream linestream(line);
-        for(int i = 0; i < 22; ++i){
+        for (int i = 0; i < 22; ++i) {
             linestream >> value;
         }
         uptime = UpTime() - std::stol(value) / sysconf(_SC_CLK_TCK);

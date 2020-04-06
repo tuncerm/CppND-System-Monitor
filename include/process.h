@@ -2,7 +2,9 @@
 #define PROCESS_H
 
 #include <string>
+
 using std::string;
+
 /*
 Basic class for Process representation
 It contains relevant attributes as shown below
@@ -10,6 +12,7 @@ It contains relevant attributes as shown below
 class Process {
 public:
     Process(int pid, string user, string cmd, long jiffies, string ram_u, long uptime);
+
     int Pid();                               // DONE: See src/process.cpp
     std::string User();                      // DONE: See src/process.cpp
     std::string Command();                   // DONE: See src/process.cpp
