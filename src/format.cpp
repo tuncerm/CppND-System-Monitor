@@ -12,10 +12,10 @@ using std::string;
 string Format::ElapsedTime(long seconds) {
     long hours = seconds / 3600;
     int minutes = (seconds % 3600) / 60;
-    seconds %= 60;
+    int seconds_ = seconds % 60;
     std::ostringstream stream;
     stream << (hours > 9 ? "" : "0") << hours << ":";
     stream << (minutes > 9 ? "" : "0") << minutes << ":";
-    stream << (seconds > 9 ? "" : "0") << seconds;
+    stream << (seconds_ > 9 ? "" : "0") << seconds_;
     return stream.str();
 }

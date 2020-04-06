@@ -1,5 +1,3 @@
-#include <string>
-
 #include "processor.h"
 #include "linux_parser.h"
 using namespace std;
@@ -9,8 +7,8 @@ float Processor::Utilization() {
     long idlejiffies = LinuxParser::IdleJiffies();
     long activeJiffies = LinuxParser::ActiveJiffies();
     long total = idlejiffies + activeJiffies;
-    long difftotal = total - last_total;
-    long diffidle = idlejiffies - last_idle;
+    float difftotal = total - last_total;
+    float diffidle = idlejiffies - last_idle;
 
     last_total = total;
     last_idle = idlejiffies;

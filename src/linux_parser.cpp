@@ -94,7 +94,7 @@ float LinuxParser::MemoryUtilization() {
 }
 
 // DONE: Read and return the system uptime
-long LinuxParser::SystemUpTime() {
+long LinuxParser::UpTime() {
     long uptime = 0;
     string line;
     std::ifstream stream(kProcDirectory + kUptimeFilename);
@@ -273,8 +273,8 @@ string LinuxParser::User(int pid) {
 
 // DONE: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid) {
-    long uptime = -1;
+long int LinuxParser::UpTime(int pid) {
+    long uptime = 0;
     string line, value;
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);
     if(stream.is_open()){
@@ -283,7 +283,7 @@ long LinuxParser::UpTime(int pid) {
         for(int i = 0; i < 22; ++i){
             linestream >> value;
         }
-        uptime = LinuxParser::SystemUpTime() - std::stol(value);
+        uptime = UpTime() - std::stol(value) / sysconf(_SC_CLK_TCK);
     }
     return uptime;
 }

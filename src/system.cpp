@@ -3,6 +3,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "process.h"
 #include "processor.h"
@@ -23,8 +24,7 @@ vector<Process> &System::Processes() {
     vector<int> pids = LinuxParser::Pids();
 
     for(int pid:pids){
-        float cpu = LinuxParser::ActiveJiffies(pid)/LinuxParser::UpTime(pid);
-        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), cpu, LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
+        Process process(pid, LinuxParser::User(pid), LinuxParser::Command(pid), LinuxParser::ActiveJiffies(pid), LinuxParser::Ram(pid), LinuxParser::UpTime(pid));
         processes_.push_back(process);
     }
 
@@ -48,4 +48,4 @@ int System::RunningProcesses() { return LinuxParser::RunningProcesses(); }
 int System::TotalProcesses() { return LinuxParser::TotalProcesses(); }
 
 // DONE: Return the number of seconds since the system started running
-long int System::UpTime() { return LinuxParser::SystemUpTime(); }
+long int System::UpTime() { return LinuxParser::UpTime(); }

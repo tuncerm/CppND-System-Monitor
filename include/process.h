@@ -9,7 +9,7 @@ It contains relevant attributes as shown below
 */
 class Process {
 public:
-    Process(int pid, string user, string cmd, float cpu_u, string ram_u, int uptime);
+    Process(int pid, string user, string cmd, long jiffies, string ram_u, long uptime);
     int Pid();                               // DONE: See src/process.cpp
     std::string User();                      // DONE: See src/process.cpp
     std::string Command();                   // DONE: See src/process.cpp
@@ -23,9 +23,12 @@ private:
     int pid_;
     string user_;
     string command_;
-    float cpu_;
+    long jiffies_;
+    long last_jifjies{0};
+    long last_uptime{0};
     string ram_;
-    int uptime_;
+    long uptime_;
+    float cpu_;
 };
 
 #endif
