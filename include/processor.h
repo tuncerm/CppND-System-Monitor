@@ -2,11 +2,13 @@
 #define PROCESSOR_H
 
 class Processor {
- public:
-  float Utilization();  // TODO: See src/processor.cpp
+public:
+    float Utilization();  // DONE: See src/processor.cpp
 
-  // TODO: Declare any necessary private members
- private:
+    // DONE: Declare any necessary private members
+private:
+    int last_total = 0;
+    int last_idle = 0;
 };
 
 #endif
