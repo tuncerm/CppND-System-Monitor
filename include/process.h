@@ -16,22 +16,22 @@ public:
     int Pid();                               // DONE: See src/process.cpp
     std::string User();                      // DONE: See src/process.cpp
     std::string Command();                   // DONE: See src/process.cpp
-    float CpuUtilization();                  // TODO: See src/process.cpp
+    float CpuUtilization();                  // DONE: See src/process.cpp
     std::string Ram();                       // DONE: See src/process.cpp
     long int UpTime();                       // DONE: See src/process.cpp
     bool operator<(Process const &a) const;  // DONE: See src/process.cpp
-
+    void Update();
     // DONE: Declare any necessary private members
 private:
     int pid_;
     string user_;
     string command_;
     long jiffies_;
-    long last_jifjies{0};
-    long last_uptime{0};
     string ram_;
     long uptime_;
-    float cpu_;
+    long last_jifjies{0};
+    long last_uptime{0};
+    float cpu_ {0};
 };
 
 #endif

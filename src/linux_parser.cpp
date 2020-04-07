@@ -279,11 +279,11 @@ long int LinuxParser::UpTime(int pid) {
     std::ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);
     if (stream.is_open()) {
         std::getline(stream, line);
-        std::istringstream linestream(line);
-        for (int i = 0; i < 22; ++i) {
-            linestream >> value;
-        }
-        uptime = UpTime() - std::stol(value) / sysconf(_SC_CLK_TCK);
+        // Adding the suggested method
+        std::istringstream istream(line);
+        std::istream_iterator<std::string> beg(istream), end;
+        std::vector<std::string> vec(beg, end);
+        uptime = UpTime() - std::stol(vec[21]) / sysconf(_SC_CLK_TCK);
     }
     return uptime;
 }
